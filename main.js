@@ -50,37 +50,37 @@ class Canvas{
 
     mousedown(event){   
         this.ismousedown=true; 
-        var point = this.mouse_to_node(event.clientX,event.clientY);
+        var point = [event.clientX,event.clientY];
         console.log("mouse down @"+point);                 
     }
 
     mousemove(event){
         if(this.ismousedown)
-        console.log(this.mouse_to_node(event.clientX,event.clientY));
+        console.log([event.clientX,event.clientY]);
     }
 
     mouseup(event){
         this.ismousedown=false;
-        var point = this.mouse_to_node(event.clientX,event.clientY);
+        var point = [event.clientX,event.clientY];
         console.log("mouse up @"+point); 
     }
 }
 function draw_grid(){
-    grid = new Grid(1240,400,20);
+    grid = new Grid(1500,500,20); //changes should made here width(x), height(y), grid size(size of one square)
     canvas = new Canvas(grid);
 
     //for vertical lines
-    for(i = 0 ; i < 1240; i+=20){
+    for(i = 0 ; i < grid.grid_x; i+=20){
         canvas.ctx.moveTo(i,0);
-        canvas.ctx.lineTo(i,400);
+        canvas.ctx.lineTo(i,grid.grid_y);
         canvas.ctx.strokeStyle = "#808080";
         canvas.ctx.stroke();
     }
 
     //for horizontal lines
-    for(i = 0 ; i < 400; i+=20){
+    for(i = 0 ; i < grid.grid_y; i+=20){
         canvas.ctx.moveTo(0,i);
-        canvas.ctx.lineTo(1240,i);
+        canvas.ctx.lineTo(grid.grid_x,i);
         canvas.ctx.strokeStyle = "#808080";
         canvas.ctx.stroke();    
     }
